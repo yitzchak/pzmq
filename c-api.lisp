@@ -325,92 +325,6 @@ Low-level API. Consider using @fun{WITH-MESSAGE}."
   "Close ØMQ socket."
   (socket :pointer))
 
-(defcenum socket-options
-  (:affinity 4)
-  (:identity 5) ; deprecated by :routing-id
-  (:routing-id 5)
-  (:subscribe 6)
-  (:unsubscribe 7)
-  (:rate 8)
-  (:recovery-ivl 9)
-  (:sndbuf 11)
-  (:rcvbuf 12)
-  (:rcvmore 13)
-  (:fd 14)
-  (:events 15)
-  (:type 16)
-  (:linger 17)
-  (:reconnect-ivl 18)
-  (:backlog 19)
-  (:reconnect-ivl-max 21)
-  (:maxmsgsize 22)
-  (:sndhwm 23)
-  (:rcvhwm 24)
-  (:multicast-hops 25)
-  (:rcvtimeo 27)
-  (:sndtimeo 28)
-  (:ipv4only 31) ; deprecated by :ipv6
-  (:last-endpoint 32)
-  (:router-behavior 33) ; deprecated by :router-mandatory
-  (:router-mandatory 33)
-  (:tcp-keepalive 34)
-  (:tcp-keepalive-cnt 35)
-  (:tcp-keepalive-idle 36)
-  (:tcp-keepalive-intvl 37)
-  (:tcp-accept-filter 38) ; deprecated
-  (:delay-attach-on-connect 39) ; deprecated by :immediate
-  (:immediate 39)
-  (:xpub-verbose 40)
-  (:router-raw 41)
-  (:ipv6 42)
-  (:mechanism 43)
-  (:plain-server 44)
-  (:plain-username 45)
-  (:plain-password 46)
-  (:curve-server 47)
-  (:curve-publickey 48)
-  (:curve-secretkey 49)
-  (:curve-serverkey 50)
-  (:probe-router 51)
-  (:req-correlate 52)
-  (:req-relaxed 53)
-  (:conflate 54)
-  (:zap-domain 55)
-  (:router-handover 56)
-  (:tos 57)
-  (:ipc-filter-pid 58) ; deprecated
-  (:ipc-filter-uid 59) ; deprecated
-  (:ipc-filter-gid 60) ; deprecated
-  (:connect-routing-id 61)
-  (:gssapi-server 62)
-  (:gssapi-principal 63)
-  (:gssapi-service-principal 64)
-  (:gssapi-plaintext 65)
-  (:handshake-ivl 66)
-  (:socks-proxy 68)
-  (:xpub-nodrop 69)
-  (:blocky 70)
-  (:xpub-manual 71)
-  (:xpub-welcome-msg 72)
-  (:stream-notify 73)
-  (:invert-matching 74)
-  (:heartbeat-ivl 75)
-  (:heartbeat-ttl 76)
-  (:heartbeat-timeout 77)
-  (:xpub-verboser 78)
-  (:connect-timeout 79)
-  (:tcp-maxrt 80)
-  (:thread-safe 81)
-  (:multicast-maxtpdu 84)
-  (:vmci-buffer-size 85)
-  (:vmci-buffer-min-size 86)
-  (:vmci-buffer-max-size 87)
-  (:vmci-connect-timeout 88)
-  (:use-fd 89)
-  (:gssapi-principal-nametype 90)
-  (:gssapi-service-principal-nametype 91)
-  (:bindtodevice 92))
-
 (defcfun ("zmq_getsockopt" %getsockopt) :int
   "Get ØMQ socket options."
   (socket :pointer)
@@ -487,7 +401,8 @@ Binary options are supported either as strings or UB8 vectors."
       ((:subscribe :unsubscribe :identity :tcp-accept-filter
         :plain-username :plain-password
         :curve-publickey :curve-secretkey
-        :curve-serverkey :zap-domain)
+        :curve-serverkey :zap-domain
+        :disconnect-msg :hello-msg :hiccup-msg :xpub-welcome-msg)
        (etypecase option-value
          (null
           (call (null-pointer) 0))
