@@ -28,6 +28,10 @@ Report ØMQ library version."
     (mapcar (lambda (ptr) (mem-ref ptr :int))
             (list major minor patch))))
 
+(defcfun ("zmq_has" has) :boolean
+  "Report whether a specified capability is available in the library."
+  (name :string))
+
 ;;; Error
 
 (defcfun ("zmq_errno" %errno) :int

@@ -38,6 +38,7 @@ Consult @a[http://api.zeromq.org/4-0:zmq]{official C API reference} first.
    ;; C API:
    ;; - misc
    #:version
+   #:has
    ;; - error
    #:errno
    #:strerror
